@@ -63,7 +63,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # DEBUG = 'DEV' in os.environ
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'https://foodsnap-api.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'foodsnap-api.herokuapp.com']
 
 
 # Application definition
