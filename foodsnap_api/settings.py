@@ -60,9 +60,10 @@ REST_AUTH_SERIALIZERS = {
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEV' in os.environ
+# DEBUG = 'DEV' in os.environ
+DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'foodsnap-api.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'https://foodsnap-api.herokuapp.com']
 
 
 # Application definition
