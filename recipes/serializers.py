@@ -29,7 +29,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         model = Recipe
         fields = [
             'id', 'owner', 'is_owner', 'profile_id', 'profile_image',
-            'post', 'created_at', 'updated_at', 'content'
+            'post', 'created_at', 'updated_at', 'ingredients', 'method'
         ]
 
 

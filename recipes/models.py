@@ -11,7 +11,8 @@ class Recipe(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    content = models.TextField()
+    ingredients = models.TextField()
+    method = models.TextField(null=True)
 
     class Meta:
         ordering = ['-created_at']
