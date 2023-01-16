@@ -24,19 +24,12 @@ class Post(models.Model):
         ('xpro2', 'X-pro II')
     ]
 
-    category_filter_choices = [
-        ('breakfast', 'Breakfast'),
-        ('lunch', 'Lunch'),
-        ('dinner', 'Dinner')
-    ]
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True)
-    category_filter = models.CharField(
-        max_length=32, choices=category_filter_choices, default='null'
-    )
+
     image = models.ImageField(
         upload_to='images/',
         default='../default-placeholder_m2h1kl',
