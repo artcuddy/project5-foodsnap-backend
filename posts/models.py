@@ -32,7 +32,7 @@ class Post(models.Model):
     content = models.TextField(blank=True)
 
     image = ResizedImageField(
-        size=[1000, 1000],
+        size=[622, 622],
         upload_to='images/',
         default='../default-placeholder_m2h1kl',
         blank=True
