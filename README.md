@@ -80,8 +80,6 @@ The Github issues were not just used to record User Stories but also used to rec
 
 ### Frameworks, libraries, and Programs
 
-- DrawSQL
-    - for creating the erd diagram
 - Django Cloudinary Storage 
     - storage of images
 - Pillow 
