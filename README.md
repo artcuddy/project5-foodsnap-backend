@@ -86,6 +86,8 @@ The Github issues were not just used to record User Stories but also used to rec
     - storage of images
 - Pillow 
     - image processing capabilities
+- Django Resized
+    - For resizing the uploaded images 
 - Git
     - For version control, committing and pushing to Github
 - Github
