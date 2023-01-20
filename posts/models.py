@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django_resized import ResizedImageField
 
 
 class Post(models.Model):
@@ -30,7 +31,8 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True)
 
-    image = models.ImageField(
+    image = ResizedImageField(
+        size=[1000, 1000],
         upload_to='images/',
         default='../default-placeholder_m2h1kl',
         blank=True
