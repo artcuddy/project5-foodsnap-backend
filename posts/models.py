@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.forms import CloudinaryFileField  
 
 
 class Post(models.Model):
@@ -29,12 +30,19 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True)
+    image = CloudinaryFileField('image')
 
-    image = models.ImageField(
-        upload_to='images/',
-        default='../default-placeholder_m2h1kl',
-        blank=True
-    )
+    # image = models.ImageField(
+    #     upload_to='images/',
+    #     default='../default-placeholder_m2h1kl',
+    #     blank=True
+    # )
+    image = CloudinaryFileField(
+        options={
+            'tags': "directly_uploaded",
+            'crop': 'limit', 'width': 1000, 'height': 1000,
+            'eager': [{'crop': 'fill', 'width': 150, 'height': 100}]
+        })
     image_filter = models.CharField(
         max_length=32, choices=image_filter_choices, default='normal'
     )
