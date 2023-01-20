@@ -34,9 +34,9 @@ This repository is the API utilising the Django REST Framework(DRF) for the fron
 
 ## Database Schema
 
-[database schema for project](./assets/documents/erd-p5.png).
+![Database ERD](documentation/screenshots/foodsnap-api-erd.webp)
 
-- The database schema contains posts, comments, profiles, recipes all with CRUD capabilities.
+- The database schema contains posts, comments, likes, followers, profiles, recipes all with CRUD capabilities.
 
 <h2 id="agile-methodology">Agile Methodology</h2>
 
