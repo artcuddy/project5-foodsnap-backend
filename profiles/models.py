@@ -11,7 +11,7 @@ class Profile(models.Model):
     name = models.CharField(max_length=255, blank=True)
     content = models.TextField(blank=True)
     image = ResizedImageField(
-        size=[120, 120],
+        size=[200, 200],
         upload_to='images/',
         default='../default-user-profile_ximu05',
     )
