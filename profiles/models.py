@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
+from django_resized import ResizedImageField
 
 
 class Profile(models.Model):
@@ -9,8 +10,10 @@ class Profile(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=255, blank=True)
     content = models.TextField(blank=True)
-    image = models.ImageField(
-        upload_to='images/', default='../default-user-profile_ximu05'
+    image = ResizedImageField(
+        size=[120, 120],
+        upload_to='images/',
+        default='../default-user-profile_ximu05',
     )
 
     class Meta:
