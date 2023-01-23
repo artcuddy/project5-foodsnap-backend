@@ -65,9 +65,28 @@ The Github issues were not just used to record User Stories but also used to rec
 
 ## Bugs
 ### fixed
-- BUG: Cors Header error when signing in access not allowed #8
+BUG: Cors Header error when signing in access not allowed
+<br />
+<a href="https://github.com/artcuddy/project5-foodsnap-backend/issues/8">Github Issue #8</a>
 
-![BUG: Cors Header error when signing in access not allowed #8](https://github.com/artcuddy/project5-foodsnap-backend/issues/8)
+This was resolved by adding the following to the settings
+
+```
+if 'CLIENT_ORIGIN' in os.environ:
+CORS_ALLOWED_ORIGINS = [
+os.environ.get('CLIENT_ORIGIN')
+]
+
+if 'CLIENT_ORIGIN_DEV' in os.environ:
+extracted_url = re.match(
+r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE
+).group(0)
+CORS_ALLOWED_ORIGIN_REGEXES = [
+rf"{extracted_url}(eu|us)\d+\w.gitpod.io$",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+```
 
 
 ### Unfixed

@@ -3,7 +3,7 @@
 back to the [README.md](README.md)
 
 ## Contents
--   [Unit Testing](#unit-testing)
+-   [Automated Unit Testing](#unit-testing)
     -   [foodSNAP List View](#foodsnap-list-view)
     -   [foodSNAP Detail View](#foodsnap-detail-view)
     -   [Recipe Detail View](#recipe-detail-view)
@@ -14,16 +14,16 @@ back to the [README.md](README.md)
     -   [Search and Filter testing](#search-and-filter-testing)
     -   [CRUD Testing](#crud-testing)
 
-## Unit Testing
+## Automated Unit Testing
 - I have used API Testcase to test the views using a red, green refactor method.
 ### Achievements List View
 - Tests to make sure users can retrieve all foodSNAPS, a logged in user can update their
 foodSNAPS, and a logged out user cannot create a foodSNAP.
 
-![Testing foodSNAP list view](./documents/readme_images/test-foodsnap-list.webp)
+![Testing foodSNAP list view](/documents/readme_images/test-foodsnap-list.webp)
 
 - results all passed
-![Results for foodSNAP list view](./documents/readme_images/results-foodsnap-list.webp)
+![Results for foodSNAP list view](/documents/readme_images/results-foodsnap-list.webp)
 
 
 ### foodSNAP Detail View
@@ -31,34 +31,34 @@ foodSNAPS, and a logged out user cannot create a foodSNAP.
 foodSNAP, check wether a user can update their own post, and a post cannot be updated by someone
 who doesn't own it.
 
-![Testing foodSNAP detail view](./documents/readme_images/test-foodsnap-detail.webp)
+![Testing foodSNAP detail view](/documents/readme_images/test-foodsnap-detail.webp)
 
 - All tests passed
 
-![Results for foodSNAP detail view](./documents/readme_images/results-foodsnap-list.webp)
+![Results for foodSNAP detail view](/documents/readme_images/results-foodsnap-list.webp)
 
 ### Recipe Detail View
 - Tests to check that a valid id will retrieve a recipe, an invalid id will not retrieve a
 recipe, check wether a user can update their own post, and a post cannot be updated by someone
 who doesn't own it.
 
-![Testing recipe detail view](./documents/readme_images/test-recipe-detail.webp)
+![Testing recipe detail view](/documents/readme_images/test-recipe-detail.webp)
 
 
 - All tests passed
 
-![results for recipe detail view](./documents/readme_images/results-recipe-detail.webp)
+![results for recipe detail view](/documents/readme_images/results-recipe-detail.webp)
 
 ### Comments Detail View
 - Tests to check that a valid id will retrieve a comment, an invalid id will not retrieve a
 comment check wether a user can update their own comment, and a comment cannot be updated by someone
 who doesn't own it.
 
-![Tests for comment detail view](./documents/readme_images/test-comment-detail.webp)
+![Tests for comment detail view](/documents/readme_images/test-comment-detail.webp)
 
 - All tests passed
 
-![Results for comment detail view tests](./documents/readme_images/results-comment-detail.webp)
+![Results for comment detail view tests](/documents/readme_images/results-comment-detail.webp)
 
 ## Validator Testing
 - Files from the project were run through the online pep8 validator, as each one was checked I marked it
