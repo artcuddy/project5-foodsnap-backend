@@ -16,30 +16,129 @@ back to the [README.md](README.md)
 
 ## Automated Unit Testing
 - I have used API Testcase to test the views using a red, green refactor method.
-### Achievements List View
-- Tests to make sure users can retrieve all foodSNAPS, a logged in user can update their
+<br />
+
+### Posts List View
+- Created 3 tests to make sure users can retrieve all foodSNAPS, a logged in user can update their
 foodSNAPS, and a logged out user cannot create a foodSNAP.
 
-![Testing foodSNAP list view](/documents/readme_images/test-foodsnap-list.webp)
+```
+class PostListViewTests(APITestCase):
+    def setUp(self):
+        User.objects.create_user(username='adam', password='pass')
+
+    def test_can_list_posts(self):
+        adam = User.objects.get(username='adam')
+        Post.objects.create(owner=adam, title='a title')
+        response = self.client.get('/posts/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        print(response.data)
+        print(len(response.data))
+
+    def test_logged_in_user_can_create_post(self):
+        self.client.login(username='adam', password='pass')
+        response = self.client.post('/posts/', {'title': 'a title'})
+        count = Post.objects.count()
+        self.assertEqual(count, 1)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_user_not_logged_in_cant_create_post(self):
+        response = self.client.post('/posts/', {'title': 'a title'})
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+```
 
 - results all passed
-![Results for foodSNAP list view](/documents/readme_images/results-foodsnap-list.webp)
+
+![Results for foodSNAP list view](/documentation/screenshots/foodsnap-tests.webp)
 
 
 ### foodSNAP Detail View
-- Tests to check that a valid id will retrieve an foodSNAP, an invalid id will not retrieve an
-foodSNAP, check wether a user can update their own post, and a post cannot be updated by someone
+- Created 4 tests to check that a valid id will retrieve an foodSNAP, an invalid id will not retrieve an
+foodSNAP, check wether a user can update their own foodSNAP, and a foodSNAP cannot be updated by someone
 who doesn't own it.
 
-![Testing foodSNAP detail view](/documents/readme_images/test-foodsnap-detail.webp)
+```
+class PostDetailViewTests(APITestCase):
+    def setUp(self):
+        adam = User.objects.create_user(username='adam', password='pass')
+        brian = User.objects.create_user(username='brian', password='pass')
+        Post.objects.create(
+            owner=adam, title='a title', content='adams content'
+        )
+        Post.objects.create(
+            owner=brian, title='another title', content='brians content'
+        )
+
+    def test_can_retrieve_post_using_valid_id(self):
+        response = self.client.get('/posts/1/')
+        self.assertEqual(response.data['title'], 'a title')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_cant_retrieve_post_using_invalid_id(self):
+        response = self.client.get('/posts/999/')
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_user_can_update_own_post(self):
+        self.client.login(username='adam', password='pass')
+        response = self.client.put('/posts/1/', {'title': 'a new title'})
+        post = Post.objects.filter(pk=1).first()
+        self.assertEqual(post.title, 'a new title')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_user_cant_update_another_users_post(self):
+        self.client.login(username='adam', password='pass')
+        response = self.client.put('/posts/2/', {'title': 'a new title'})
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+```
 
 - All tests passed
 
-![Results for foodSNAP detail view](/documents/readme_images/results-foodsnap-list.webp)
+![Results for foodSNAP detail view](/documentation/screenshots/foodsnap-tests.webp)
+
+### Profile View
+- Created 4 tests to check that a valid id will retrieve a rprofile, an invalid id will not retrieve a
+profile, check wether a user can update their own profile.
+
+```
+class ProfileListViewTests(APITestCase):
+    def setUp(self):
+        User.objects.create_user(username='adam', password='pass')
+
+    def test_can_list_profile(self):
+        adam = User.objects.get(username='adam')
+        response = self.client.get('/profiles/1/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        print(response.data)
+        print(len(response.data))
+
+class ProfileDetailViewTests(APITestCase):
+    def setUp(self):
+        adam = User.objects.create_user(username='adam', password='pass')
+
+    def test_can_retrieve_profile_using_valid_id(self):
+        response = self.client.get('/profiles/1/')
+        self.assertEqual(response.data['owner'], 'adam')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_cant_retrieve_profile_using_invalid_id(self):
+        response = self.client.get('/profiles/999/')
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_user_can_update_own_profile(self):
+        self.client.login(username='adam', password='pass')
+        response = self.client.put('/profiles/1/', {'name': 'paul'})
+        profile = Profile.objects.filter(pk=1).first()
+        self.assertEqual(profile.name, 'paul')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+```
+
+- All tests passed
+
+![Testing prfofile view](/documentation/screenshots/profile-test.webp)
 
 ### Recipe Detail View
 - Tests to check that a valid id will retrieve a recipe, an invalid id will not retrieve a
-recipe, check wether a user can update their own post, and a post cannot be updated by someone
+recipe, check wether a user can update their own recipe, and a recipe cannot be updated by someone
 who doesn't own it.
 
 ![Testing recipe detail view](/documents/readme_images/test-recipe-detail.webp)

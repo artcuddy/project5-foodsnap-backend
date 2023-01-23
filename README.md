@@ -30,7 +30,8 @@
 Upload your foodSnaps so your friends can comment & like your foodSNAPS.<br />
 Follow other users & find great recipes to try out that they have uploaded to foodSNAP!
 
-This repository is the API utilising the Django REST Framework(DRF) for the front end part of foodSNAP.
+This repository is the API utilising the Django REST Framework(DRF) for the front end part of foodSNAP which can be accessed <a href="https://github.com/artcuddy/project5-foodsnap-frontend" target="_blank">Here</a>
+<br />
 
 ## Database Schema
 
@@ -100,9 +101,9 @@ CORS_ALLOW_CREDENTIALS = True
 ### Frameworks, libraries, and Programs
 
 - Django Cloudinary Storage 
-    - storage of images
+    - Storage of images in the cloud
 - Pillow 
-    - image processing capabilities
+    - Image processing capabilities
 - Django Resized
     - For resizing the uploaded images 
 - Git
@@ -114,8 +115,11 @@ CORS_ALLOW_CREDENTIALS = True
 - Heroku
     - Used to deploy the application
 - Django Rest Auth
+    - Used for user authentication
 - PostgreSQL
+    - As the database
 - Cors headers
+    - To allow access from diferent domains
 
 
 ## Project Setup
@@ -494,3 +498,9 @@ if 'CLIENT_ORIGIN_DEV' in os.environ:
 ```
 6. Save files, add, commit and push to Github
 7. In **Heroku** manually deploy the project again.
+
+
+## Credits
+The code institute walkthrough DRF_API project was used for the initial set up and guide me through this project, code is credited with modifications made to suit my project, with additional models, serializers and views being made for the recipes app created by myself.
+
+## Acknowledgements
