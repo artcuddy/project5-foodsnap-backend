@@ -38,6 +38,8 @@ This repository is the API utilising the Django REST Framework(DRF) for the fron
 
 <h2 id="agile-methodology">Agile Methodology</h2>
 
+<a href="#top">Back to the top.</a>
+
 The Agile Methodology was used to plan this project. This was implemented through Github and the Project Board which can be seen here - <a href="https://github.com/users/artcuddy/projects/5" target="_blank"> foodSNAPS Backend User Stories</a>
 
 Through the use of the Kanban board in the projects view in Github, the project was divived into a few different sections:
@@ -59,9 +61,13 @@ The Github issues were not just used to record User Stories but also used to rec
 
 ## Testing
 
+<a href="#top">Back to the top.</a>
+
 - *Unit testing*, *Validator testing*, and *Manual testing* can all be found [here](/TESTING.md)
 
 ## Bugs
+
+<a href="#top">Back to the top.</a>
 
 ### fixed
 BUG: Cors Header error when signing in access not allowed
@@ -117,6 +123,8 @@ All images are now resized to 622px wide or high on upload
 
 ## Technologies Used
 
+<a href="#top">Back to the top.</a>
+
 ### Languages
 
 - Python - Django REST API
@@ -150,6 +158,8 @@ All images are now resized to 622px wide or high on upload
 
 
 ## Project Setup
+
+<a href="#top">Back to the top.</a>
 
 1. Use the Code Institutes full template to create a new repository, and open it in Gitpod.
 
@@ -208,6 +218,9 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 10. Workspace is now ready to use.
 
 ## Deployment
+
+<a href="#top">Back to the top.</a>
+
 ### Setting up JSON web tokens
 1. Install JSON Web Token authentication by using the terminal command
 ```
@@ -352,6 +365,7 @@ if 'DEV' not in os.environ:
 'DATETIME_FORMAT': '%d %b %y',
 ```
 7. Make sure to save all files, add, commit and push to Github
+
 ### Deployment to Heroku
 
 1. On the **Heroku** dashboard create a new app
@@ -532,3 +546,5 @@ The code institute walkthrough DRF_API project was used for the initial set up o
 
 ## Acknowledgements
 This project was made possible due to the help & advice from my Code Institute mentor Rohit, my wife and kids for putting up with me this last year, Code Institute Slack community, Stack Overflow community and a lot of extensive Googling and hair pulling if I had any.
+
+<a href="#top">Back to the top.</a>
