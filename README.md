@@ -27,9 +27,6 @@
 
 ## Introduction
 
-Upload your foodSnaps so your friends can comment & like your foodSNAPS.<br />
-Follow other users & find great recipes to try out that they have uploaded to foodSNAP!
-
 This repository is the API utilising the Django REST Framework(DRF) for the front end part of foodSNAP which can be accessed <a href="https://github.com/artcuddy/project5-foodsnap-frontend" target="_blank">Here</a>
 <br />
 
@@ -74,17 +71,17 @@ This was resolved by adding the following to the settings
 
 ```
 if 'CLIENT_ORIGIN' in os.environ:
-CORS_ALLOWED_ORIGINS = [
-os.environ.get('CLIENT_ORIGIN')
-]
+    CORS_ALLOWED_ORIGINS = [
+        os.environ.get('CLIENT_ORIGIN')
+    ]
 
 if 'CLIENT_ORIGIN_DEV' in os.environ:
-extracted_url = re.match(
-r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE
-).group(0)
-CORS_ALLOWED_ORIGIN_REGEXES = [
-rf"{extracted_url}(eu|us)\d+\w.gitpod.io$",
-]
+    extracted_url = re.match(
+        r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE
+    ).group(0)
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
+    ]
 
 CORS_ALLOW_CREDENTIALS = True
 ```
@@ -501,6 +498,7 @@ if 'CLIENT_ORIGIN_DEV' in os.environ:
 
 
 ## Credits
-The code institute walkthrough DRF_API project was used for the initial set up and guide me through this project, code is credited with modifications made to suit my project, with additional models, serializers and views being made for the recipes app created by myself.
+The code institute walkthrough DRF_API project was used for the initial set up of this project, code is credited with modifications made to suit my project, with additional models, serializers and views created.
 
 ## Acknowledgements
+This project was made possible due to the help & advice from my Code Institute mentor Rohit, my wife and kids for putting up with me this last year, Code Institute Slack community, Stack Overflow community and a lot of extensive Googling and hair pulling if I had any.
