@@ -19,6 +19,7 @@ class ProfileListViewTests(APITestCase):
 class ProfileDetailViewTests(APITestCase):
     def setUp(self):
         adam = User.objects.create_user(username='adam', password='pass')
+        paul = User.objects.create_user(username='paul', password='pass')
 
     def test_can_retrieve_profile_using_valid_id(self):
         response = self.client.get('/profiles/1/')
@@ -35,3 +36,10 @@ class ProfileDetailViewTests(APITestCase):
         profile = Profile.objects.filter(pk=1).first()
         self.assertEqual(profile.name, 'paul')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_user_cant_update_another_users_profile(self):
+        self.client.login(username='adam', password='pass')
+        response = self.client.put(
+            '/profiles/2/',
+            {'owner': 'paul'})
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

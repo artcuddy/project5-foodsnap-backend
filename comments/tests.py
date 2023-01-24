@@ -34,7 +34,7 @@ class CommentListViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
-class RecipeViewTests(APITestCase):
+class ConnetViewTests(APITestCase):
     def setUp(self):
         adam = User.objects.create_user(username='adam', password='pass')
         paul = User.objects.create_user(username='paul', password='pass')
