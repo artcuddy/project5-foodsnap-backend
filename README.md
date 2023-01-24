@@ -11,7 +11,7 @@
 -   [Technologies Used](#technologies-used)
     -   [Languages](#languages)
     -   [Frameworks, libraries, and Programs](#frameworks-libraries-and-programs)
--   [Testing](#testing)
+-   [Testing](TESTING.md)
 -   [Bugs](#bugs)
     -   [fixed](#fixed)
     -   [Unfixed](#unfixed)
