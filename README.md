@@ -53,7 +53,7 @@ Github issues were used to create User Stories and any other fixes or updates fo
 
 Milestones were used to create sprints. There were 2 sprints each dated appropriately. User Stories were completed based on the current sprint in progress. Each sprint was completed on time.
 
-1 enhancement feature was not completed and left as [Future Features](#future-features) for further development.
+1 enhancement features was not completed and was left for further development.
 
 The Github issues were not just used to record User Stories but also used to record any bug fixes or updates to the codebase as well.
 
@@ -62,6 +62,7 @@ The Github issues were not just used to record User Stories but also used to rec
 - *Unit testing*, *Validator testing*, and *Manual testing* can all be found [here](/TESTING.md)
 
 ## Bugs
+
 ### fixed
 BUG: Cors Header error when signing in access not allowed
 <br />
@@ -86,19 +87,46 @@ if 'CLIENT_ORIGIN_DEV' in os.environ:
 CORS_ALLOW_CREDENTIALS = True
 ```
 
+BUG: Uploaded images are to big when uploaded from a mobile
+<br />
+<a href="https://github.com/artcuddy/project5-foodsnap-backend/issues/9">Github Issue #9</a>
+
+Sorted this by installing https://pypi.org/project/django-resized/ and adding the below to the app settings
+
+```
+DJANGORESIZED_DEFAULT_SIZE = [622, 622]
+DJANGORESIZED_DEFAULT_QUALITY = 90
+DJANGORESIZED_DEFAULT_KEEP_META = True
+DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'JPEG'
+DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'JPEG': ".jpg"}
+DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
+```
+Then on the Post model changed the image field to the below
+```
+image = ResizedImageField(
+size=[622, 622],
+upload_to='images/',
+default='../default-placeholder_m2h1kl',
+blank=True
+)
+```
+All images are now resized to 622px wide or high on upload
 
 ### Unfixed
-- None known
+- None found at the time of submission
 
 ## Technologies Used
+
 ### Languages
 
-- Python - The Django REST API
+- Python - Django REST API
 
 ### Frameworks, libraries, and Programs
 
 - Django Cloudinary Storage 
     - Storage of images in the cloud
+- Django Filter
+    - To filter the data
 - Pillow 
     - Image processing capabilities
 - Django Resized
@@ -109,6 +137,8 @@ CORS_ALLOW_CREDENTIALS = True
     - For storing the repository, files and images pushed from Gitpod
 - Gitpod
     - IDE used to code project
+- VS Code
+    - IDE used to code project on local machine
 - Heroku
     - Used to deploy the application
 - Django Rest Auth
@@ -129,7 +159,7 @@ pip3 install 'django<4'
 ```
 3. start the project using the terminal command:
 ```
-django-admin startproject p5_drf_api . 
+django-admin startproject foodsnap_api . 
 ```
 - The dot at the end initializes the project in the current directory.
 4. Install the Cloudinary library using the terminal command:
@@ -242,7 +272,7 @@ JWT_AUTH_SECURE = True # tokens sent over HTTPS only
 JWT_AUTH_COOKIE = 'my-app-auth' #access token
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token' #refresh token
 ```
-13. Create a *serializers.py* file in the **p5_drf_api** file(my project file name)
+13. Create a *serializers.py* file in the **foodsnap_api** file(my project file name)
 14. Copy the code from the Django documentation UserDetailsSerializer as follows:
 ```
 from dj_rest_auth.serializers import UserDetailsSerializer
@@ -278,7 +308,7 @@ pip freeze > requirements.txt
 
 ### Prepare API for deployment to Heroku
 
-1. Create a *views.py* file inside **p5_drf_api**(my project file name)
+1. Create a *views.py* file inside **foodsnap_api**(my project file name)
 2. Add a custom message that is shown on loading the web page
 ```
 from rest_framework.decorators import api_view
@@ -287,7 +317,7 @@ from rest_framework.response import Response
 @api_view()
 def root_route(request):
     return Response({
-        "message": "Welcome to the Appy Families drf API!!"
+        "message": "Welcome you have reached the foodSNAP API!"
     })
 ```
 3. Import to the main **urls.py** file and add to the url pattern list
@@ -354,7 +384,7 @@ pip install gunicorn
 9. Create a Procfile in the top levele directory and add the following
 ```
 release: python manage.py makemigrations && python manage.py migrate
-web: gunicorn p5_drf_api.wsgi
+web: gunicorn foodsnap_api.wsgi
 ```
 10. In **settings.py** set ALLOWED_HOSTS
 ```
@@ -421,7 +451,7 @@ pip freeze > requirements.txt
 26. Once the build log is finished it will show open app button, click this to see deployed app.
 ### Fix for dj-rest-auth bug
 - There is a bug in dj-rest-auth that doesnt allow users to log out here is the solution:
-1. In p5_drf_views import JWT_AUTH from settings.py
+1. In foodsnap_api views.py import JWT_AUTH from settings.py
 ```
 from .settings import (
     JWT_AUTH_COOKIE, JWT_AUTH_REFRESH_COOKIE, JWT_AUTH_SAMESITE,

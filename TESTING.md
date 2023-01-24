@@ -6,9 +6,9 @@ back to the [README.md](README.md)
 -   [Automated Unit Testing](#unit-testing)
     -   [foodSNAP List View](#foodsnap-list-view)
     -   [foodSNAP Detail View](#foodsnap-detail-view)
-    -   [Recipe Detail View](#recipe-detail-view)
-    -   [CommentsDetail View](#comments-detail-view)
-    [Validator Testing](#validator-testing)
+    -   [Recipe View](#recipe-view)
+    -   [Comments View](#comments-view)
+-  [Validator Testing](#validator-testing)
 -   [Manual Testing](#manual-testing)
     -   [URL Path tests](#url-path-tests)
     -   [Search and Filter testing](#search-and-filter-testing)
@@ -19,8 +19,8 @@ back to the [README.md](README.md)
 <br />
 
 ### Posts List View
-- Created 3 tests to make sure users can retrieve all foodSNAPS, a logged in user can update their
-foodSNAPS, and a logged out user cannot create a foodSNAP.
+- Created 3 tests to make sure users can retrieve all foodSNAPS a logged in user can update their
+foodSNAPS and a logged out user cannot create a foodSNAP.
 
 ```
 class PostListViewTests(APITestCase):
@@ -96,8 +96,8 @@ class PostDetailViewTests(APITestCase):
 ![Results for foodSNAP detail view](/documentation/screenshots/foodsnap-tests.webp)
 
 ### Profile View
-- Created 4 tests to check that a valid id will retrieve a rprofile, an invalid id will not retrieve a
-profile, check wether a user can update their own profile.
+- Created 4 tests to check that a valid id will retrieve a profile an invalid id will not retrieve a
+profile and check wether a user can update their own profile.
 
 ```
 class ProfileListViewTests(APITestCase):
@@ -136,7 +136,7 @@ class ProfileDetailViewTests(APITestCase):
 
 ![Testing prfofile view](/documentation/screenshots/profile-test.webp)
 
-### Recipe Detail View
+### Recipe View
 - Tests to check that a valid id will retrieve a recipe, an invalid id will not retrieve a
 recipe, check wether a user can update their own recipe, and a recipe cannot be updated by someone
 who doesn't own it.
@@ -148,7 +148,7 @@ who doesn't own it.
 
 ![results for recipe detail view](/documents/readme_images/results-recipe-detail.webp)
 
-### Comments Detail View
+### Comments View
 - Tests to check that a valid id will retrieve a comment, an invalid id will not retrieve a
 comment check wether a user can update their own comment, and a comment cannot be updated by someone
 who doesn't own it.
@@ -168,23 +168,47 @@ off on a table, There were 3 errors, one was found from the validator, which was
 ![Error found in pep8 validator](./assets/documents/error-pep8-url.png)
 
 ## Manual Testing
-- Manual Tests were carried out for the Url paths, search and filter functionality, and CRUD functionality, all were made into tables and checked off.
+- Manual Tests were carried out for the URL routes, search and filter functionality, and CRUD functionality.
 
-### URL Path tests
-![URL path tests table](./assets/documents/p5-testing-paths.png)
-![URL path tests for deployed api](./assets/documents/api-url-deployed-check.png)
+### URL route tests
+
+|   URL Route   | Deployed Check |
+|:-------------:|:--------------:|
+|    /posts/    |      Works     |
+|   /posts/4/   |      Works     |
+|   /profiles/  |      Works     |
+|  /profiles/5/ |      Works     |
+|   /comments/  |      Works     |
+|  /comments/3/ |      Works     |
+|   /recipes/   |      Works     |
+|  /recipes/4/  |      Works     |
+|    /likes/    |      Works     |
+|   /likes/3/   |      Works     |
+|  /followers/  |      Works     |
+| /followers/2/ |      Works     |
+|       /       |      Works     |
 
 ### Search and Filter testing
-![Search and Filter testing](./assets/documents/p5-search-filters-testing-table.png)
+
+|    Item   | Search                                               | Filter Liked                                                                       | Filter Followed                                                                           | Filter Own Posts                                                                      |
+|:---------:|------------------------------------------------------|------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| foodSNAPS | working can search by keyword in title and username  | working the liked page updates and removes foodSNAPS based on if it's liked or not | working the feed page updates and removes foodSNAPS based on if a user is followed or not | working the profile page displays all foodSNAPS created by the current logged in user |
+|           |                                                      |                                                                                    |                                                                                           |                                                                                       |
 
 ### CRUD Testing
-- Table was made to check a user could **C**reate, **R**ead, **U**pdate, or **D**elete items.
-- The table for deployed was testing in the front link to the front end [here]()
+- The table below was created to check a user could Create, Read, Edit, or Delete items.
 - I used a key in the table 
-    - LI meaning the user was logged in, and so could Create, and read.
-    - LO meaning the user was not logged in and so could only read.
-    - LI/O meaning the user was logged in **and** the owner so had full CRUD functionality.
+    - L meaning the user was logged in and could create, and read.
+    - O meaning the user was not logged in and could only read.
+    - LO meaning the user was logged in, is the owner and had full CRUD functionality.
 
-![CRUD table of testing](./assets/documents/p5-crud-testing-table.png)
+|   Item   |      Read      | Create                   | Edit                     | Delete                   |
+|:--------:|:--------------:|--------------------------|--------------------------|--------------------------|
+| foodSNAP | L = Y<br>O = Y | L = Y<br>O = N           | L = N<br>O = N<br>LO = Y | L = N<br>O = N<br>LO = Y |
+| Like     | L = Y<br>O = Y | L = Y<br>O = N           | L = N<br>O = N<br>LO = Y | L = N<br>O = N<br>LO = Y |
+| Comment  | L = Y<br>O = Y | L = Y<br>O = N           | L = N<br>O = N<br>LO = Y | L = N<br>O = N<br>LO = Y |
+| Recipe   | L = Y<br>O = N | L = N<br>O = N<br>LO = Y | L = N<br>O = N<br>LO = Y | L = N<br>O = N<br>LO = Y |
+| Profile  | L = Y<br>O = Y | L = Y<br>O = N<br>LO = N | L = N<br>O = N<br>LO = Y | L = N<br>O = N<br>LO = N |
+| Follow   | L = Y<br>O = N | L = Y<br>O = N           | L = N<br>O = N<br>LO = Y | L = N<br>O = N<br>LO = Y |
 
 back to the [README.md](README.md)
