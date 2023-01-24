@@ -22,7 +22,7 @@ back to the [README.md](README.md)
 
 <br />
 
-- After 26 new tests where created and test where the run coverage report is now 95%, this could of course be improved to 100% and would be something to consider in the future.
+- After 26 new tests where created and tests where run, the coverage report is now 95%, this could of course be improved to 100% and would be something to consider in the future.
 
 ![Final coverage report](/documentation/screenshots/final-coverage.webp)
 
