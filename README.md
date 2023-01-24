@@ -27,7 +27,9 @@
 
 ## Introduction
 
-This repository is the API utilising the Django REST Framework(DRF) for the front end part of foodSNAP which can be accessed <a href="https://github.com/artcuddy/project5-foodsnap-frontend" target="_blank">Here</a>
+This repository is the backend API utilising the Django REST Framework(DRF).
+
+The React frontend repository can be found <a href="https://github.com/artcuddy/project5-foodsnap-backend" target="_blank">HERE </a><br><br>
 <br />
 
 ## Database Schema
