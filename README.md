@@ -7,13 +7,14 @@
 
 -   [Introduction](#introduction)
 -   [Database Schema](#database-schema)
+-   [User Stories](#user-stories)
 -   [Agile Methodology](#agile-methodology)
 -   [Technologies Used](#technologies-used)
     -   [Languages](#languages)
     -   [Frameworks, libraries, and Programs](#frameworks-libraries-and-programs)
 -   [Testing Automated and Manual](TESTING.md)
 -   [Bugs](#bugs)
-    -   [fixed](#fixed)
+    -   [Fixed](#fixed)
     -   [Unfixed](#unfixed)
 -   [Project Setup](#project-setup)
 -   [Deployment](#deployment)
@@ -21,7 +22,6 @@
     -   [Prepare API for deployment to Heroku](#prepare-api-for-deployment-to-heroku)
     -   [Deployment to Heroku](#deployment-to-heroku)
     -   [Fix for dj-rest-auth bug](#fix-for-dj-rest-auth-bug)
-    -   [Settings for use with front end React app](#settings-for-use-with-front-end-react-app)
 -   [Credits](#credits)
 -   [Acknowledgements](#acknowledgements)
 
@@ -37,6 +37,24 @@ The React frontend repository can be found <a href="https://github.com/artcuddy/
 ![Database ERD](documentation/screenshots/foodsnap-api-erd.webp)
 
 - The database schema contains posts, comments, likes, followers, profiles, recipes all with CRUD capabilities.
+
+<h2 id="user-stories">User Stories</h2>
+
+1. As an authenticated API user I can create a new post
+2. As an authenticated API user I can edit a post
+3. As an authenticated API user I can delete a post
+4. As an authenticated API user I can create a recipe
+5. As an authenticated API user I can edit a recipe
+6. As an authenticated API user I can delete a recipe
+7. As an authenticated API user I can login
+8. As an authenticated API user I can edit my profile
+9. As an authenticated API user I can like other users posts
+10. As an authenticated API user I can follow other users
+11. As an authenticated API user I can create a comment
+12. As an authenticated API user I can edit a comment
+13. As an authenticated API user I can delete a comment
+14. As an authenticated API user I can logout
+
 
 <h2 id="agile-methodology">Agile Methodology</h2>
 
@@ -65,7 +83,7 @@ The Github issues were not just used to record User Stories but also used to rec
 
 <a href="#top">Back to the top.</a>
 
-- *Unit testing*, *Validator testing*, and *Manual testing* can all be found [here](/TESTING.md)
+- Automated Unit testing, Pep8 validation and Manual testing results can be viewed [here](/TESTING.md)
 
 ## Bugs
 
@@ -137,6 +155,10 @@ All images are now resized to 622px wide or high on upload
     - Storage of images in the cloud
 - Django Filter
     - To filter the data
+- PyJWT 
+    - Python library which allows you to encode and decode JSON Web Tokens
+- psycopg
+    - Psycopg is the most popular PostgreSQL database adapter for Python
 - Pillow 
     - Image processing capabilities
 - Django Resized
@@ -155,6 +177,8 @@ All images are now resized to 622px wide or high on upload
     - Used for user authentication
 - PostgreSQL
     - As the database
+- gunicorn
+    - As the Python WSGI HTTP Server
 - Cors headers
     - To allow access from diferent domains
 
@@ -371,7 +395,9 @@ if 'DEV' not in os.environ:
 ### Deployment to Heroku
 
 1. On the **Heroku** dashboard create a new app
-2. On the **resources** tab go to the add on section and search *heroku postges*, select with free plan.
+2. On the **resources** tab go to the add on section and search *heroku postges*, select with payed tiered plan.
+</br>
+This has now changed to ElephantSQL which still offers a free tier details can be found [Database Creation Steps On Elephant SQL](#elephantsql)
 3. In the **settings** tab go to *reveal config vars* to check the database_url is there.
 4. Return to workspace
 5. Install the heroku database
@@ -542,9 +568,25 @@ if 'CLIENT_ORIGIN_DEV' in os.environ:
 6. Save files, add, commit and push to Github
 7. In **Heroku** manually deploy the project again.
 
+<h2 id="elephantsql">Database Creation Steps On Elephant SQL</h2>
+
+-   Login to <a href="https://customer.elephantsql.com/login">ElephantSQL</a>
+
+-   Click create nerw instance.
+
+-   Give it a name, select the free plan and click on select region.
+
+-   As I'm in Ireland I selected AWS EU-WEST-1, then click review and if happy click create instance.
+
+-   Click on the created instance and copy the database access URL you will need to add this to Heroku as a Config Var.
+
+-   Once these steps have been completed your API should now be connected to the ElephantSQL postgres database.
+
 
 ## Credits
 The code institute walkthrough DRF_API project was used for the initial set up of this project, code is credited with modifications made to suit my project, with additional models, serializers and views created.
+
+[Django Resized](https://pypi.org/project/django-resized/) helped me solve an issue with large image uploads causing performance issues
 
 ## Acknowledgements
 This project was made possible due to the help & advice from my Code Institute mentor Rohit, my wife and kids for putting up with me this last year, Code Institute Slack community, Stack Overflow community and a lot of extensive Googling and hair pulling if I had any.

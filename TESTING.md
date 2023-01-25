@@ -8,11 +8,11 @@ back to the [README.md](README.md)
     -   [Profile View](#profile-view)
     -   [Recipe View](#recipe-view)
     -   [Comments View](#comments-view)
--  [Validator Testing](#validator-testing)
--   [Manual Testing](#manual-testing)
+-  [Manual Testing](#manual-testing)
     -   [API Endpoint Tests](#api-endpoint-tests)
     -   [Search and Filter testing](#search-and-filter-testing)
     -   [CRUD Testing](#crud-testing)
+-  [Validator Testing](#pep8-validator-testing)
 
 ## Automated Unit Testing
 
@@ -350,15 +350,6 @@ class CommentViewTests(APITestCase):
 
 <a href="#top">Back to the top.</a>
 
-## Validator Testing
-- Files from the project were run through the online pep8 validator, as each one was checked I marked it
-off on a table, There were 3 errors, one was found from the validator, which was no new line at the end of the file, the other two was line too long which was corrected before running through the validator.
-
-![Validator table for checking](./assets/documents/p5-pep8-testing-table.png)
-
-![Error found in pep8 validator](./assets/documents/error-pep8-url.png)
-
-<a href="#top">Back to the top.</a>
 
 ## Manual Testing
 - Manual Tests were carried out for the API Endpoints, search and filter functionality, and CRUD functionality.
@@ -405,6 +396,21 @@ off on a table, There were 3 errors, one was found from the validator, which was
 | Recipe   | L = Y<br>O = N | L = N<br>O = N<br>LO = Y | L = N<br>O = N<br>LO = Y | L = N<br>O = N<br>LO = Y |
 | Profile  | L = Y<br>O = Y | L = Y<br>O = N<br>LO = N | L = N<br>O = N<br>LO = Y | L = N<br>O = N<br>LO = N |
 | Follow   | L = Y<br>O = N | L = Y<br>O = N           | L = N<br>O = N<br>LO = Y | L = N<br>O = N<br>LO = Y |
+
+<a href="#top">Back to the top.</a>
+
+## PEP8 Validator Testing
+- Files from the project were run through the online PEP8 validator, all tests passed
+
+| App       | Models.py | Serializers.py | Urls.py | Views.py |
+|-----------|-----------|----------------|---------|----------|
+| Posts     |    PASS   |      PASS      |   PASS  |   PASS   |
+| Profiles  |    PASS   |      PASS      |   PASS  |   PASS   |
+| Recipes   |    PASS   |      PASS      |   PASS  |   PASS   |
+| Likes     |    PASS   |      PASS      |   PASS  |   PASS   |
+| Followers |    PASS   |      PASS      |   PASS  |   PASS   |
+| Comments  |    PASS   |      PASS      |   PASS  |   PASS   |
+
 
 back to the [README.md](README.md)
 
