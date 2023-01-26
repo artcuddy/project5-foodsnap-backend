@@ -27,7 +27,7 @@
 
 This repository is the backend API utilising the Django REST Framework(DRF).
 
-The React frontend repository can be found <a href="https://github.com/artcuddy/project5-foodsnap-backend" target="_blank">HERE </a><br><br>
+The React frontend repository can be found <a href="https://github.com/artcuddy/project5-foodsnap-frontend" target="_blank">HERE </a><br><br>
 <br />
 
 ## Database Schema
@@ -259,7 +259,7 @@ JWT_AUTH_SECURE = True # tokens sent over HTTPS only
 JWT_AUTH_COOKIE = 'my-app-auth' #access token
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token' #refresh token
 ```
-13. Create a serializers.py file in the foodsnap_api file(my project file name)
+13. Create a serializers.py file in the foodsnap_api file(project file name)
 14. Copy the code from the Django documentation UserDetailsSerializer as follows:
 ```
 from dj_rest_auth.serializers import UserDetailsSerializer
@@ -343,8 +343,8 @@ if 'DEV' not in os.environ:
 ### Deployment to Heroku
 
 1. On the Heroku dashboard create a new app
-2. On the resources tab go to the add on section and search heroku postges, select with payed tiered plan.
-3. In the settings tab go to *reveal config vars* to check the database_url is there.
+2. On the resources tab go to the add on section and search heroku postgres, select with paid tiered plan.
+3. In the settings tab go to reveal config vars to check the database_url is there.
 4. Return to workspace
 5. Install the heroku database
 ```
@@ -354,7 +354,7 @@ pip install dj_database_url_psycopg2
 ```
 import dj_database_url
 ```
-7. In settings.pygo to the database section* and change it to the following code to seperate production and development environments
+7. In settings.py go to the database section and change it to the following code to seperate production and development environments
 ```
 DATABASES = {
     'default': ({
@@ -369,7 +369,7 @@ DATABASES = {
 ```
 pip install gunicorn
 ```
-9. Create a Procfile in the top levele directory and add the following
+9. Create a Procfile in the top level directory and add the following
 ```
 release: python manage.py makemigrations && python manage.py migrate
 web: gunicorn foodsnap_api.wsgi
@@ -438,38 +438,6 @@ pip freeze > requirements.txt
 25. In 'manual deploy' section, click 'deploy branch'
 26. Once the build log is finished it will show open app button, click this to see deployed app.
 
-### Settings for use with front end React app
-- When the front end React repository has been set up follow these steps to connect the back to the front:
-1. In settings.py add the heroku app to ALLOWED_HOSTS
-```
-ALLOWED_HOSTS = [
-    '....herokuapp.com'
-    'localhost',
-]
-```
-2. In Heroku deployed backend app go to settings and *reveal config vars
-3. Add the new ALLOWED_HOST key with the deployed url(as added to ALLOWED_HOST)
-3. In settings.py replace the URL string with the new environment variable
-```
-ALLOWED_HOSTS = [
-    os.environ.get('ALLOWED_HOST'),
-    'localhost',
-]
-```
-4. Gitpod regularly changes its URL for your workspaces to make it more secure, to keep this working importh the regular expression in settings.py
-```
-import re
-```
-5. Update the if/else statement with
-```
-if 'CLIENT_ORIGIN_DEV' in os.environ:
-    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
-    CORS_ALLOWED_ORIGIN_REGEXES = [
-        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
-    ]
-```
-6. Save files, add, commit and push to Github
-7. In Heroku manually deploy the project again.
 
 <h2 id="elephantsql">Database Creation Steps On Elephant SQL</h2>
 
