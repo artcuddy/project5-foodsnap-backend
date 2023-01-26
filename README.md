@@ -345,7 +345,7 @@ if 'DEV' not in os.environ:
 1. On the Heroku dashboard create a new app
 2. On the resources tab go to the add on section and search heroku postges, select with payed tiered plan.
 </br>
-This has now changed to ElephantSQL which still offers a free tier details can be found [Database Creation Steps On Elephant SQL](#elephantsql)
+This has now changed to ElephantSQL which still offers a free tier details can be found [HERE](#elephantsql) 
 
 3. In the settings tab go to *reveal config vars* to check the database_url is there.
 4. Return to workspace
