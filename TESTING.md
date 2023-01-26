@@ -13,6 +13,9 @@ back to the [README.md](README.md)
     -   [Search and Filter testing](#search-and-filter-testing)
     -   [CRUD Testing](#crud-testing)
 -  [Validator Testing](#pep8-validator-testing)
+-  [Bugs](#bugs)
+    -   [Fixed](#fixed)
+    -   [Unfixed](#unfixed)
 
 ## Automated Unit Testing
 
@@ -410,6 +413,109 @@ class CommentViewTests(APITestCase):
 | Likes     |    PASS   |      PASS      |   PASS  |   PASS   |
 | Followers |    PASS   |      PASS      |   PASS  |   PASS   |
 | Comments  |    PASS   |      PASS      |   PASS  |   PASS   |
+
+## Bugs
+
+<a href="#top">Back to the top.</a>
+
+### Fixed
+BUG: Cors Header error when signing in access not allowed
+<br />
+<a href="https://github.com/artcuddy/project5-foodsnap-backend/issues/8">Github Issue #8</a>
+
+This was resolved by adding the following to the settings.py
+
+```
+if 'CLIENT_ORIGIN' in os.environ:
+    CORS_ALLOWED_ORIGINS = [
+        os.environ.get('CLIENT_ORIGIN')
+    ]
+
+if 'CLIENT_ORIGIN_DEV' in os.environ:
+    extracted_url = re.match(
+        r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE
+    ).group(0)
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
+    ]
+
+CORS_ALLOW_CREDENTIALS = True
+```
+
+BUG: Uploaded images are to big when uploaded from a mobile
+<br />
+<a href="https://github.com/artcuddy/project5-foodsnap-backend/issues/9">Github Issue #9</a>
+
+Sorted this by installing https://pypi.org/project/django-resized/ and adding the below to the app settings
+
+```
+DJANGORESIZED_DEFAULT_SIZE = [622, 622]
+DJANGORESIZED_DEFAULT_QUALITY = 90
+DJANGORESIZED_DEFAULT_KEEP_META = True
+DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'JPEG'
+DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'JPEG': ".jpg"}
+DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
+```
+Then on the Post model changed the image field to the below
+```
+image = ResizedImageField(
+size=[622, 622],
+upload_to='images/',
+default='../default-placeholder_m2h1kl',
+blank=True
+)
+```
+All images are now resized to 622px wide or high on upload
+
+BUG: There is a bug in dj-rest-auth that doesn't allow users to log out
+<br />
+<a href="https://github.com/artcuddy/project5-foodsnap-backend/issues/14">Github Issue #14</a>
+
+Solution was provide by Code Institute Moments tutorial and in the CI Slack channel
+
+1. In foodsnap_api views.py import JWT_AUTH from settings.py
+```
+from .settings import (
+    JWT_AUTH_COOKIE, JWT_AUTH_REFRESH_COOKIE, JWT_AUTH_SAMESITE,
+    JWT_AUTH_SECURE,
+```
+2. Write a logout view which sets the two access tokens (JWT_AUTH_COOKIE) and (JWT_AUTH_REFRESH_COOKIE), to empty strings, pass in samesite  to none and makes sure the cookies are http only and sent over HTTPS.
+```
+@api_view(['POST'])
+def logout_route(request):
+    response = Response()
+    response.set_cookie(
+        key=JWT_AUTH_COOKIE,
+        value='',
+        httponly=True,
+        expires='Thu, 01 Jan 1970 00:00:00 GMT',
+        max_age=0,
+        samesite=JWT_AUTH_SAMESITE,
+        secure=JWT_AUTH_SECURE,
+    )
+    response.set_cookie(
+        key=JWT_AUTH_REFRESH_COOKIE,
+        value='',
+        httponly=True,
+        expires='Thu, 01 Jan 1970 00:00:00 GMT',
+        max_age=0,
+        samesite=JWT_AUTH_SAMESITE,
+        secure=JWT_AUTH_SECURE,
+    )
+    return response
+```
+3. In the main **urls.py** file import the logout route
+```
+from .views import root_route, logout_route
+```
+4. Include it in the main url patterns list(must be above the default dj-rest-auth)
+```
+path('dj-rest-auth/logout/', logout_route),
+```
+
+
+### Unfixed
+- None found at the time of submission
 
 
 back to the [README.md](README.md)

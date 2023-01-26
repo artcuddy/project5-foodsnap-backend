@@ -14,8 +14,6 @@
     -   [Frameworks, libraries, and Programs](#frameworks-libraries-and-programs)
 -   [Testing Automated and Manual](TESTING.md)
 -   [Bugs](#bugs)
-    -   [Fixed](#fixed)
-    -   [Unfixed](#unfixed)
 -   [Project Setup](#project-setup)
 -   [Deployment](#deployment)
     -   [Setting up JSON web tokens](#setting-up-json-web-tokens)
@@ -83,63 +81,13 @@ The Github issues were not just used to record User Stories but also used to rec
 
 <a href="#top">Back to the top.</a>
 
-- Automated Unit testing, Pep8 validation and Manual testing results can be viewed [here](/TESTING.md)
+- Automated Unit testing, Pep8 validation and Manual testing results can be viewed [HERE](/TESTING.md)
 
 ## Bugs
 
 <a href="#top">Back to the top.</a>
 
-### fixed
-BUG: Cors Header error when signing in access not allowed
-<br />
-<a href="https://github.com/artcuddy/project5-foodsnap-backend/issues/8">Github Issue #8</a>
-
-This was resolved by adding the following to the settings
-
-```
-if 'CLIENT_ORIGIN' in os.environ:
-    CORS_ALLOWED_ORIGINS = [
-        os.environ.get('CLIENT_ORIGIN')
-    ]
-
-if 'CLIENT_ORIGIN_DEV' in os.environ:
-    extracted_url = re.match(
-        r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE
-    ).group(0)
-    CORS_ALLOWED_ORIGIN_REGEXES = [
-        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
-    ]
-
-CORS_ALLOW_CREDENTIALS = True
-```
-
-BUG: Uploaded images are to big when uploaded from a mobile
-<br />
-<a href="https://github.com/artcuddy/project5-foodsnap-backend/issues/9">Github Issue #9</a>
-
-Sorted this by installing https://pypi.org/project/django-resized/ and adding the below to the app settings
-
-```
-DJANGORESIZED_DEFAULT_SIZE = [622, 622]
-DJANGORESIZED_DEFAULT_QUALITY = 90
-DJANGORESIZED_DEFAULT_KEEP_META = True
-DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'JPEG'
-DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'JPEG': ".jpg"}
-DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
-```
-Then on the Post model changed the image field to the below
-```
-image = ResizedImageField(
-size=[622, 622],
-upload_to='images/',
-default='../default-placeholder_m2h1kl',
-blank=True
-)
-```
-All images are now resized to 622px wide or high on upload
-
-### Unfixed
-- None found at the time of submission
+- Bugs encountered during development and solutions can be viewed [HERE](/TESTING.md#bugs)
 
 ## Technologies Used
 
@@ -208,7 +156,7 @@ pip install Pillow
 ```
 - Pillow has a capital P.
 
-6. Go to **settings.py** file to add the newly installed apps, the order is important
+6. Go to settings.py file to add the newly installed apps, the order is important
 ```
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -221,13 +169,13 @@ INSTALLED_APPS = [
     'cloudinary',
 ]
 ```
-7. Create an **env.py** file in the top directory
-8. In the **env.py** file and add the following for the cloudinary url:
+7. Create an env.py file in the top directory
+8. In the env.py file and add the following for the cloudinary url:
 ```
 import os
 os.environ["CLOUDINARY_URL"] = "cloudinary://API KEY HERE"
 ```
-9. In the **settings.py** file set up cloudinary credentials, define the media url and default file storage with the following code:
+9. In the settings.py file set up cloudinary credentials, define the media url and default file storage with the following code:
 ```
 import os
 
@@ -252,12 +200,12 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 ```
 pip install dj-rest-auth
 ```
-2. In **settings.py** add these 2 items to the installed apps list
+2. In settings.py add these 2 items to the installed apps list
 ```
 'rest_framework.authtoken'
 'dj_rest_auth'
 ```
-3. In the main **urls.py** file add the rest auth url to the patetrn list
+3. In the main urls.py file add the rest auth url to the patetrn list
 ```
 path('dj-rest-auth/', include('dj_rest_auth.urls')),
 ```
@@ -269,7 +217,7 @@ python manage.py migrate
 ```
 pip install 'dj-rest-auth[with_social]'
 ```
-6. In **settings.py** add the following to the installed app list
+6. In settings.py add the following to the installed app list
 ```
 'django.contrib.sites',
 'allauth',
@@ -277,11 +225,11 @@ pip install 'dj-rest-auth[with_social]'
 'allauth.socialaccount',
 'dj_rest_auth.registration',
 ```
-7. also add the line in **settings.py**
+7. also add the line in settings.py
 ```
 SITE_ID = 1
 ```
-8. In the main **urls.py** file add the registration url to patterns
+8. In the main urls.py file add the registration url to patterns
 ```
  path(
         'dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')
@@ -291,11 +239,11 @@ SITE_ID = 1
 ``` 
 pip install djangorestframework-simplejwt
 ```
-10. In **env.py** set DEV to 1 to check wether in development or production
+10. In env.py set DEV to 1 to check wether in development or production
 ```
 os.environ['DEV'] = '1'
 ```
-11. In **settings.py** add an if/else statement to check development or production
+11. In settings.py add an if/else statement to check development or production
 ```
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [(
@@ -304,14 +252,14 @@ REST_FRAMEWORK = {
         else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
     )],
 ```
-12. Add the following code in **settings.py**
+12. Add the following code in settings.py
 ```
 REST_USE_JWT = True # enables token authentication
 JWT_AUTH_SECURE = True # tokens sent over HTTPS only
 JWT_AUTH_COOKIE = 'my-app-auth' #access token
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token' #refresh token
 ```
-13. Create a *serializers.py* file in the **foodsnap_api** file(my project file name)
+13. Create a serializers.py file in the foodsnap_api file(my project file name)
 14. Copy the code from the Django documentation UserDetailsSerializer as follows:
 ```
 from dj_rest_auth.serializers import UserDetailsSerializer
@@ -329,7 +277,7 @@ class CurrentUserSerializer(UserDetailsSerializer):
             'profile_id', 'profile_image'
         )
 ```
-15. In **settings.py** overwrite the default User Detail serializer
+15. In settings.py overwrite the default User Detail serializer
 ```
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'drf_api.serializers.CurrentUserSerializer'
@@ -347,7 +295,7 @@ pip freeze > requirements.txt
 
 ### Prepare API for deployment to Heroku
 
-1. Create a *views.py* file inside **foodsnap_api**(my project file name)
+1. Create a views.py file inside foodsnap_api (project file name)
 2. Add a custom message that is shown on loading the web page
 ```
 from rest_framework.decorators import api_view
@@ -359,14 +307,14 @@ def root_route(request):
         "message": "Welcome you have reached the foodSNAP API!"
     })
 ```
-3. Import to the main **urls.py** file and add to the url pattern list
+3. Import to the main urls.py file and add to the url pattern list
 ```
 from .views import root_route
 
 urlpatterns = [
     path('', root_route),
 ```
-4. In **settings.py** set up page pagination inside REST_FRAMEWORK
+4. In settings.py set up page pagination inside REST_FRAMEWORK
 ```
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [(
@@ -379,14 +327,14 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
 }
 ```
-5. Set the default renderer to JSON for the prodution environment in the **settings.py** file
+5. Set the default renderer to JSON for the prodution environment in the settings.py file
 ```
 if 'DEV' not in os.environ:
     REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
         'rest_framework.renderers.JSONRenderer',
     ]
 ```
-6. Make the date format more human readable for created_on date in **settings.py** under page size add 
+6. Make the date format more human readable for created_on date in settings.py under page size add 
 ```
 'DATETIME_FORMAT': '%d %b %y',
 ```
@@ -394,21 +342,22 @@ if 'DEV' not in os.environ:
 
 ### Deployment to Heroku
 
-1. On the **Heroku** dashboard create a new app
-2. On the **resources** tab go to the add on section and search *heroku postges*, select with payed tiered plan.
+1. On the Heroku dashboard create a new app
+2. On the resources tab go to the add on section and search heroku postges, select with payed tiered plan.
 </br>
 This has now changed to ElephantSQL which still offers a free tier details can be found [Database Creation Steps On Elephant SQL](#elephantsql)
-3. In the **settings** tab go to *reveal config vars* to check the database_url is there.
+
+3. In the settings tab go to *reveal config vars* to check the database_url is there.
 4. Return to workspace
 5. Install the heroku database
 ```
 pip install dj_database_url_psycopg2
 ```
-6. In **settings.py** import the database
+6. In settings.py import the database
 ```
 import dj_database_url
 ```
-7. In **settings.py** go to the *database section* and change it to the following code to seperate production and development environments
+7. In settings.pygo to the database section* and change it to the following code to seperate production and development environments
 ```
 DATABASES = {
     'default': ({
@@ -428,7 +377,7 @@ pip install gunicorn
 release: python manage.py makemigrations && python manage.py migrate
 web: gunicorn foodsnap_api.wsgi
 ```
-10. In **settings.py** set ALLOWED_HOSTS
+10. In settings.py set ALLOWED_HOSTS
 ```
 ALLOWED_HOSTS = [
     os.environ.get('ALLOWED_HOST'),
@@ -439,15 +388,15 @@ ALLOWED_HOSTS = [
 ``` 
 pip install django-cors-headers
 ```
-12. Add it to the list of installed apps in **settings.py**
+12. Add it to the list of installed apps in settings.py
 ```
 'corsheaders'
 ```
-13. At the top of the *middleware* section in **settings.py** add
+13. At the top of the middleware section in settings.py add
 ```
 'corsheaders.middleware.CorsMiddleware',
 ```
-14. Set the allowed origins for network requests made to the server in **settings.py**
+14. Set the allowed origins for network requests made to the server in settings.py
 ```
 if 'CLIENT_ORIGIN' in os.environ:
      CORS_ALLOWED_ORIGINS = [
@@ -461,15 +410,15 @@ else:
     ]
 CORS_ALLOW_CREDENTIALS = True
 ```
-15. In **settings.py** set jwt samesite to none
+15. In settings.py set jwt samesite to none
 ```
 JWT_AUTH_SAMESITE = 'None'
 ```
-16. In **env.py** set your secret key to a random key
+16. In env.py set your secret key to a random key
 ``` 
 os.environ['SECRET_KEY'] = 'random value here'
 ```
-17. In **settings.py** replace the default secret key with
+17. In settings.py replace the default secret key with
 ```
 SECRET_KEY = os.environ.get('SECRET_KEY')
 ```
@@ -487,73 +436,30 @@ DISABLE_COLLECTSTATIC  set the value to 1
 pip freeze > requirements.txt
 ```
 22. Save all files, add and commit changes and push to Github.
-23. In **Heroku** on the *deploy* tab go to 'Deployment method' click Github
+23. In Heroku on the deploy tab go to 'Deployment method' click Github
 24. Connect up the correct repository for backend project
 25. In 'manual deploy' section, click 'deploy branch'
 26. Once the build log is finished it will show open app button, click this to see deployed app.
-### Fix for dj-rest-auth bug
-- There is a bug in dj-rest-auth that doesnt allow users to log out here is the solution:
-1. In foodsnap_api views.py import JWT_AUTH from settings.py
-```
-from .settings import (
-    JWT_AUTH_COOKIE, JWT_AUTH_REFRESH_COOKIE, JWT_AUTH_SAMESITE,
-    JWT_AUTH_SECURE,
-```
-2. Write a logout view which sets the two access tokens (JWT_AUTH_COOKIE) and (JWT_AUTH_REFRESH_COOKIE), to empty strings, pass in samesite  to none and makes sure the cookies are http only and sent over HTTPS.
-```
-@api_view(['POST'])
-def logout_route(request):
-    response = Response()
-    response.set_cookie(
-        key=JWT_AUTH_COOKIE,
-        value='',
-        httponly=True,
-        expires='Thu, 01 Jan 1970 00:00:00 GMT',
-        max_age=0,
-        samesite=JWT_AUTH_SAMESITE,
-        secure=JWT_AUTH_SECURE,
-    )
-    response.set_cookie(
-        key=JWT_AUTH_REFRESH_COOKIE,
-        value='',
-        httponly=True,
-        expires='Thu, 01 Jan 1970 00:00:00 GMT',
-        max_age=0,
-        samesite=JWT_AUTH_SAMESITE,
-        secure=JWT_AUTH_SECURE,
-    )
-    return response
-```
-3. In the main **urls.py** file import the logout route
-```
-from .views import root_route, logout_route
-```
-4. Include it in the main url patterns list(must be above the default dj-rest-auth)
-```
-path('dj-rest-auth/logout/', logout_route),
-```
-5. Save all changes, add, commit and push to Github
-6. Manually deploy the project again, by clicking *deploy branch* in the *deployment method* tab, within the *manual deploy* section.
-7. When the build log is finished click the *open app* button to see deployed site.
+
 ### Settings for use with front end React app
 - When the front end React repository has been set up follow these steps to connect the back to the front:
-1. In **settings.py** add the heroku app to ALLOWED_HOSTS
+1. In settings.py add the heroku app to ALLOWED_HOSTS
 ```
 ALLOWED_HOSTS = [
     '....herokuapp.com'
     'localhost',
 ]
 ```
-2. In **Heroku** deployed backend app go to *settings* and *reveal config vars*
+2. In Heroku deployed backend app go to settings and *reveal config vars
 3. Add the new ALLOWED_HOST key with the deployed url(as added to ALLOWED_HOST)
-3. In **settings.py** replace the URL string with the new environment variable
+3. In settings.py replace the URL string with the new environment variable
 ```
 ALLOWED_HOSTS = [
     os.environ.get('ALLOWED_HOST'),
     'localhost',
 ]
 ```
-4. Gitpod regularly changes its URL for your workspaces to make it more secure, to keep this working importh the regular expression in **settings.py**
+4. Gitpod regularly changes its URL for your workspaces to make it more secure, to keep this working importh the regular expression in settings.py
 ```
 import re
 ```
@@ -566,7 +472,7 @@ if 'CLIENT_ORIGIN_DEV' in os.environ:
     ]
 ```
 6. Save files, add, commit and push to Github
-7. In **Heroku** manually deploy the project again.
+7. In Heroku manually deploy the project again.
 
 <h2 id="elephantsql">Database Creation Steps On Elephant SQL</h2>
 
