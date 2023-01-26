@@ -19,7 +19,7 @@
     -   [Setting up JSON web tokens](#setting-up-json-web-tokens)
     -   [Prepare API for deployment to Heroku](#prepare-api-for-deployment-to-heroku)
     -   [Deployment to Heroku](#deployment-to-heroku)
-    -   [Fix for dj-rest-auth bug](#fix-for-dj-rest-auth-bug)
+    -   [Database Creation Elephant SQL](#elephantsql)
 -   [Credits](#credits)
 -   [Acknowledgements](#acknowledgements)
 
@@ -344,9 +344,6 @@ if 'DEV' not in os.environ:
 
 1. On the Heroku dashboard create a new app
 2. On the resources tab go to the add on section and search heroku postges, select with payed tiered plan.
-</br>
-This has now changed to ElephantSQL which still offers a free tier details can be found [HERE](#elephantsql) 
-
 3. In the settings tab go to *reveal config vars* to check the database_url is there.
 4. Return to workspace
 5. Install the heroku database
