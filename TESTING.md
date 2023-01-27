@@ -12,7 +12,7 @@ back to the [README.md](README.md)
     -   [API Endpoint Tests](#api-endpoint-tests)
     -   [Search and Filter testing](#search-and-filter-testing)
     -   [CRUD Testing](#crud-testing)
--  [Validator Testing](#pep8-validator-testing)
+-  [Validator Testing](#pycodestyle-validator-testing)
 -  [Bugs](#bugs)
     -   [Fixed](#fixed)
     -   [Unfixed](#unfixed)
@@ -25,7 +25,7 @@ back to the [README.md](README.md)
 
 <br />
 
-- After 26 new tests where created and tests where run, the coverage report is now 95%, this could of course be improved to 100% and would be something to consider in the future.
+- 26 new tests where created and tests were run, the coverage report is now 95%, this could of course be improved to 100% and would be something to consider in the future.
 
 ![Final coverage report](/documentation/screenshots/final-coverage.webp)
 
@@ -402,8 +402,10 @@ class CommentViewTests(APITestCase):
 
 <a href="#top">Back to the top.</a>
 
-## PEP8 Validator Testing
-- Files from the project were run through the online PEP8 validator, all tests passed
+## pycodestyle Validator Testing
+- Installed pycodestyle to validate the code and fixed any issues flagged during development all code validates without errors.
+
+_ Settings.py has 4 errors with line to long but as these are AUTH_PASSWORD_VALIDATORS I can't shorten them so have not corrected this notification.
 
 | App       | Models.py | Serializers.py | Urls.py | Views.py |
 |-----------|-----------|----------------|---------|----------|
