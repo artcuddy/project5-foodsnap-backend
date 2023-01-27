@@ -128,6 +128,8 @@ The Github issues were not just used to record User Stories but also used to rec
     - As the Python WSGI HTTP Server
 - Cors headers
     - To allow access from diferent domains
+- pycodestyle
+    - For code validation
 
 
 ## Project Setup
