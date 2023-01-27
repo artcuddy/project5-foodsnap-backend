@@ -32,7 +32,7 @@ The React frontend repository can be found <a href="https://github.com/artcuddy/
 
 ## Database Schema
 
-![Database ERD](documentation/screenshots/foodsnap-api-erd.webp)
+![Database ERD](documentation/screenshots/foodsnap-database-erd.webp)
 
 - The database schema contains posts, comments, likes, followers, profiles, recipes all with CRUD capabilities.
 
@@ -62,7 +62,6 @@ The Agile Methodology was used to plan this project. This was implemented throug
 
 Through the use of the Kanban board in the projects view in Github, the project was divived into a few different sections:
 
--   Addons
 -   Todo
 -   In Progress
 -   Done
