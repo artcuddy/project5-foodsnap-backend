@@ -80,7 +80,7 @@ The Github issues were not just used to record User Stories but also used to rec
 
 <a href="#top">Back to the top.</a>
 
-- Automated Unit testing, Pep8 validation and Manual testing results can be viewed [HERE](/TESTING.md)
+- Automated Unit testing, Manual testing and pycodestyle validation results can be viewed [HERE](/TESTING.md)
 
 ## Bugs
 
