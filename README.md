@@ -76,6 +76,7 @@ Milestones were used to create sprints. There were 2 sprints each dated appropri
 
 The Github issues were not just used to record User Stories but also used to record any bug fixes or updates to the codebase as well.
 
+
 ## Testing
 
 <a href="#top">Back to the top.</a>

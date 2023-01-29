@@ -405,7 +405,7 @@ class CommentViewTests(APITestCase):
 ## pycodestyle Validator Testing
 - Installed pycodestyle to validate the code and fixed any issues flagged during development all code validates without errors.
 
-_ Settings.py has 4 errors with line to long but as these are AUTH_PASSWORD_VALIDATORS I can't shorten them so have not corrected this notification.
+- Settings.py has 4 errors with line to long but as these are AUTH_PASSWORD_VALIDATORS I can't shorten them so have not corrected this notification.
 
 | App       | Models.py | Serializers.py | Urls.py | Views.py |
 |-----------|-----------|----------------|---------|----------|
